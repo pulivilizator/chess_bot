@@ -21,4 +21,4 @@ class HasEvent(Protocol):
 class WidgetEnum(Protocol):
     @property
     def WIDGET_KEY(self) -> str:  # noqa #N802
-        pass
+        ...

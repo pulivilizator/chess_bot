@@ -16,5 +16,6 @@ async def menu_getter(
 ) -> dict[str, Any]:
     return {
         "start_message": i18n.main_menu.start_message(),
+        "start_game_message": i18n.main_menu.start_game_message(),
         "languages": ((Languages.RU, i18n.lang.ru()), (Languages.EN, i18n.lang.en())),
     }

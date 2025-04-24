@@ -18,9 +18,7 @@ class CreateUserInteractor(BaseInteractor):
         new_user = await self._user_repo.create(user, response_model=dto.UserDTO)
         settings.user_id = new_user.telegram_id
         await self._user_settings_repo.create(settings)
-        return await self._user_repo.get(
-            new_user.telegram_id
-        )
+        return await self._user_repo.get(new_user.telegram_id)
 
 
 class UpdateUserSettingsInteractor(BaseInteractor):
