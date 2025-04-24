@@ -104,3 +104,4 @@ cython_debug/
 .idea/
 
 .pypirc
+.DS_Store

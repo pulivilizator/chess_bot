@@ -5,8 +5,8 @@ class TranslatorRunner:
     def get(self, path: str, **kwargs) -> str: ...
     
     main_menu: Main_menu
-    lang: Lang
     common: Common
+    lang: Lang
     game: Game
 
 
@@ -18,17 +18,17 @@ class Main_menu:
     def start_game_message() -> Literal["""Play"""]: ...
 
 
+class Common:
+    @staticmethod
+    def back_message() -> Literal["""Back"""]: ...
+
+
 class Lang:
     @staticmethod
     def ru() -> Literal["""🇷🇺 Русский"""]: ...
 
     @staticmethod
     def en() -> Literal["""🇬🇧 English"""]: ...
-
-
-class Common:
-    @staticmethod
-    def back_message() -> Literal["""Back"""]: ...
 
 
 class Game:
@@ -39,7 +39,7 @@ class Game:
     def with_bot_message() -> Literal["""🤖 Play with bot"""]: ...
 
     @staticmethod
-    def with_player_message() -> Literal["""👤 Play with another player"""]: ...
+    def with_player_message() -> Literal["""👤 Play with player"""]: ...
 
     @staticmethod
     def bot_choose_side_message() -> Literal["""&lt;b&gt;Choose your side:&lt;/b&gt;"""]: ...
