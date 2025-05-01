@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Self, TypeAlias
+from typing import Self, TypeAlias, TypeVar
 
 from redis.asyncio import Redis
 
 from bot.core.enums import CacheLoadModules
 
 DATA_TYPE: TypeAlias = dict[str, str | int]
+CACHE_TYPE = TypeVar("CACHE_TYPE", bound="BaseCache")
 
 
 class BaseCache(ABC):
@@ -25,6 +26,10 @@ class BaseCache(ABC):
 
 class BaseUserCache(BaseCache, ABC):
     user_id: int | str
+
+
+class BaseGameCache(BaseCache, ABC):
+    game_id: str
 
 
 class BaseModule(ABC):

@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 from uuid import UUID
 
 from sqlalchemy import (
@@ -17,6 +20,9 @@ from bot.core.enums import Languages
 from .base import Base
 from .mixins import TimestampMixin
 
+if TYPE_CHECKING:
+    from .games import Game
+
 
 class User(TimestampMixin, Base):
     __tablename__ = "users"
@@ -25,11 +31,17 @@ class User(TimestampMixin, Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     is_admin: Mapped[bool] = mapped_column(Boolean, default=True)
 
-    settings: Mapped["UserSettings"] = relationship(
+    settings: Mapped[UserSettings] = relationship(
         back_populates="user",
         uselist=False,
         cascade="all, delete-orphan",
         lazy="joined",
+    )
+    games: Mapped[list[Game]] = relationship(
+        "Game",
+        back_populates="player_1",
+        foreign_keys="Game.player_1_id",
+        primaryjoin="User.telegram_id == Game.player_1_id",
     )
 
 
@@ -52,4 +64,4 @@ class UserSettings(TimestampMixin, Base):
         unique=True,
     )
 
-    user: Mapped["User"] = relationship(back_populates="settings")
+    user: Mapped[User] = relationship(back_populates="settings")

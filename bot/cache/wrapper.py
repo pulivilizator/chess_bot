@@ -18,7 +18,7 @@ class FieldWrapper:
     ) -> None:
         """
         parent: ссылка на родителя (Settings, Profile, или сам UserCache),
-                       откуда мы можем дотянуться до redis и user_id
+                откуда мы можем дотянуться до redis и user_id
         field_name: название поля (например, "language")
         default: значение по умолчанию, если ничего не нашлось
         """

@@ -1,3 +1,4 @@
+from .cache import CacheMiddleware
 from .database import DatabaseMiddleware
 from .dialog_reset import DialogResetMiddleware
 from .i18n import TranslatorRunnerMiddleware
@@ -11,5 +12,6 @@ __all__ = [
     "RegisterMiddleware",
     "DialogResetMiddleware",
     "DatabaseMiddleware",
+    "CacheMiddleware",
     "aiogram_middleware_inject",
 ]

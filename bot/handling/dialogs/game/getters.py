@@ -12,7 +12,6 @@ async def game_common_getter(
     i18n: TranslatorRunner,
     **kwargs: Any,
 ) -> dict[str, Any]:
-    """Общий геттер для диалога игры."""
     return {
         "back_message": i18n.common.back_message(),
     }
@@ -23,7 +22,6 @@ async def choose_mode_getter(
     i18n: TranslatorRunner,
     **kwargs: Any,
 ) -> dict[str, Any]:
-    """Геттер для окна выбора режима игры."""
     return {
         "game_choose_mode_message": i18n.game.choose_mode_message(),
         "game_with_bot": i18n.game.with_bot_message(),
@@ -36,7 +34,6 @@ async def bot_game_side_getter(
     i18n: TranslatorRunner,
     **kwargs: Any,
 ) -> dict[str, Any]:
-    """Геттер для окна выбора стороны в игре с ботом."""
     return {
         "game_bot_choose_side": i18n.game.bot_choose_side_message(),
         "game_bot_choose_white": i18n.game.bot_choose_white_message(),

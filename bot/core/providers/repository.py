@@ -3,7 +3,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from bot.core import dto
 from bot.repository import UserRepository, UserSettingsRepository
+from bot.repository.impl.game import GameRepository
 from database.models import User, UserSettings
+from database.models.games import Game
 
 
 class RepositoryProvider(Provider):
@@ -25,5 +27,14 @@ class RepositoryProvider(Provider):
             session=session,
             model=UserSettings,
             dto_model=dto.UserSettingsDTO,
+            lookup_field="id",
+        )
+
+    @provide(scope=Scope.REQUEST)
+    def get_game_repository(self, session: AsyncSession) -> GameRepository:
+        return GameRepository(
+            session=session,
+            model=Game,
+            dto_model=dto.GameDTO,
             lookup_field="id",
         )

@@ -7,6 +7,7 @@ from dishka import AsyncContainer
 from dishka.integrations.aiogram import setup_dishka
 
 from bot.core.middlewares import (
+    CacheMiddleware,
     DatabaseMiddleware,
     DialogResetMiddleware,
     LoggingMiddleware,
@@ -32,6 +33,7 @@ async def assemble(
     dp.update.middleware(DatabaseMiddleware())
     dp.update.middleware(RegisterMiddleware())
     dp.update.middleware(TranslatorRunnerMiddleware())
+    dp.update.middleware(CacheMiddleware())
     dp.update.middleware(
         DialogResetMiddleware(init_state=MainMenuSG.menu, mode=StartMode.RESET_STACK),
     )
