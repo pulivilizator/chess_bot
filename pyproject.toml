@@ -14,6 +14,7 @@ dependencies = [
     "fluentogram>=1.1.10",
     "nats-py>=2.9.0",
     "orjson>=3.10.15",
+    "python-chess>=1.999",
     "redis[asyncio]>=5.2.1",
     "sqlalchemy[asyncio]>=2.0.38",
     "structlog>=25.1.0",
@@ -27,3 +28,6 @@ dev = [
     "ruff>=0.9.7",
     "types-redis>=4.6.0.20241004",
 ]
+
+[tool.uv.workspace]
+members = ["board-renderer"]

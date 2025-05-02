@@ -17,6 +17,20 @@ services:
     profiles:
       - all
 
+  board-renderer:
+    build:
+      context: ./board-renderer
+      dockerfile: Dockerfile
+    command: ["/app/entrypoint.sh"]
+    environment:
+      NATS_URL: "nats://nats:4222"
+      WORKERS: 4
+    depends_on:
+      - nats
+    profiles:
+      - infrastructure
+      - all
+
   nats:
     image: nats:2.10.24
     restart: on-failure
