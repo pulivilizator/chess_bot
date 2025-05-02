@@ -1,7 +1,7 @@
 from typing import Any, Generic, Optional
 
 from pydantic import BaseModel
-from sqlalchemy import select
+from sqlalchemy import Select, select
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import DeclarativeBase, Query
@@ -109,7 +109,7 @@ class SQLAlchemyRepository(Generic[ModelType, DTOModel], AbstractSQLRepository):
             else:
                 await self.logger.error(f"Model does not have attribute {key}")
                 raise AttributeError(f"Model does not have attribute {key}")
-        await self._session.commit()
+        await self._session.flush()
         await self._session.refresh(obj)
         if response_model is None:
             return self._dto_model.model_validate(obj, from_attributes=True)
@@ -118,12 +118,11 @@ class SQLAlchemyRepository(Generic[ModelType, DTOModel], AbstractSQLRepository):
     async def destroy(self, lookup_value: Any) -> None:
         obj = await self.get_instance(lookup_value)
         await self._session.delete(obj)
-        await self._session.commit()
         await self.logger.info(f"Model {obj} destroyed")
 
     async def list(
         self,
-        filter_query: Optional[Query[Any]] = None,
+        filter_query: Optional[Select[Any] | Query[Any]] = None,
         response_model: Optional[type[DTOModelResponse]] = None,
     ) -> list[DTOModel | DTOModelResponse]:
         if filter_query is None:

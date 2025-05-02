@@ -49,6 +49,14 @@ class ModuleMixin(Generic[CACHE_TYPE]):
         elif self._parent.ex_time:
             await self._parent.redis.expire(redis_key, self._parent.ex_time)
 
+    async def delete(self, game_id: str | None = None) -> None:
+        if game_id is None:
+            redis_key = self._make_redis_key()
+            await self._parent.redis.delete(redis_key)
+        else:
+            redis_key = self._make_redis_key()
+            await self._parent.redis.delete(redis_key)
+
     @property
     def data(self) -> DATA_TYPE:
         return self._data

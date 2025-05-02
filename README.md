@@ -1,8 +1,8 @@
-# **Telegram Bot Template on Aiogram**
+# **Telegram Chess Bot on Aiogram**
 
 ---
 
-A template for a Telegram bot that includes:
+A Telegram bot that includes:
 - working with a cache (Redis)
 - database (PostgreSQL, SQLAlchemy)
 - localization (Fluentogram)
@@ -63,3 +63,6 @@ You can find the full list of dependencies in [`pyproject.toml`](./pyproject.tom
 ├── ruff.toml             # Ruff configuration
 └── pyproject.toml        # Dependencies (uv)
 ```
+
+
+TODO: Добавить taskiq для удаления отмененных игр

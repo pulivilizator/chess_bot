@@ -47,6 +47,9 @@ class BaseModule(ABC):
     async def _save_field(self, field_name: str, value: str | int | None) -> None:
         raise NotImplementedError
 
+    async def delete(self, game_id: str | None = None) -> None:
+        raise NotImplementedError
+
     @property
     @abstractmethod
     def data(self) -> DATA_TYPE:

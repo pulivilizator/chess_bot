@@ -1,8 +1,9 @@
 # sqlalchemy_repository.pyi
 
 from logging import Logger
-from typing import Any, Generic, Optional, overload, Type
+from typing import Any, Generic, overload, Type
 from pydantic import BaseModel
+from sqlalchemy.sql.selectable import Select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import DeclarativeBase, Query
 from structlog import get_logger
@@ -138,7 +139,7 @@ class SQLAlchemyRepository(Generic[ModelType, DTOModel], AbstractSQLRepository):
     @overload
     async def list(
         self,
-        filter_query: Query[Any],
+        filter_query: Select[Any] | Query[Any],
         response_model: None,
     ) -> list[DTOModel]:
         ...
@@ -152,7 +153,7 @@ class SQLAlchemyRepository(Generic[ModelType, DTOModel], AbstractSQLRepository):
     @overload
     async def list(
         self,
-        filter_query: Query[Any],
+        filter_query: Select[Any] | Query[Any],
         response_model: Type[DTOModelResponse],
     ) -> list[DTOModelResponse]:
         ...
